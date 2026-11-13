@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html lang="en"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Eagles: The Democratic Manager</title>
+<link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@500;700&family=Barlow:wght@400;600&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#e8edf1;--panel:#fff;--p2:#f0f4f7;--ink:#13202b;--mut:#5a6e7f;--edge:#cfd9e2;--acc:#12a36b;--blue:#1e6bff;--gold:#e8a800;--red:#e04545;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#0b141d;--panel:#122030;--p2:#1a2c3f;--ink:#e8eef3;--mut:#8aa0b3;--edge:#243a4f;--acc:#3ddc97;--gold:#ffcc4d}}
+:root[data-theme="dark"]{--bg:#0b141d;--panel:#122030;--p2:#1a2c3f;--ink:#e8eef3;--mut:#8aa0b3;--edge:#243a4f;--acc:#3ddc97;--gold:#ffcc4d}
+*{box-sizing:border-box}html,body{margin:0}[hidden]{display:none!important}
+body{background:var(--bg);color:var(--ink);font:400 15px/1.35 Barlow,system-ui,sans-serif;padding:12px}
+.app{max-width:980px;margin:0 auto}
+h2{font:700 14px 'Barlow Condensed',sans-serif;letter-spacing:.08em;text-transform:uppercase;color:var(--mut);margin:0 0 10px}
+.top{display:flex;align-items:center;gap:12px;margin-bottom:12px}.top b{font:700 24px 'Barlow Condensed',sans-serif}.top small,.mut{color:var(--mut)}.sp{flex:1}
+.crest{display:inline-grid;place-items:center;width:30px;height:30px;border-radius:50% 50% 46% 46%;background:var(--k);color:#fff;font:700 15px 'Barlow Condensed',sans-serif;border:2px solid #fff6;font-style:normal;flex:none}
+.crest.lg{width:52px;height:52px;font-size:26px}.crest.sm{width:20px;height:20px;font-size:11px;margin-right:7px;vertical-align:middle}
+.card,.pn{background:var(--panel);border:1px solid var(--edge);border-radius:10px;padding:14px}
+.grid{display:grid;grid-template-columns:1.1fr 1fr;gap:12px}.grid>div{display:grid;gap:12px;align-content:start}
+.vs2{display:flex;align-items:center;justify-content:center;gap:12px;margin:6px 0 14px}.vs2 b{font:700 26px 'Barlow Condensed',sans-serif}.vs2 em{color:var(--mut)}
+.cp{display:grid;grid-template-columns:30px 1fr 40px 1fr 30px;gap:6px;align-items:center;font-weight:600;margin-bottom:12px;text-align:center}
+.cp div{height:8px;background:var(--p2);border-radius:4px;overflow:hidden}.cp div i{display:block;height:100%;background:var(--blue)}.cp div.r{transform:scaleX(-1)}.cp div.r i{background:var(--gold)}
+.btn{font:700 17px 'Barlow Condensed',sans-serif;letter-spacing:.06em;background:var(--acc);color:#05241a;border:0;border-radius:8px;padding:12px 18px;width:100%;cursor:pointer}
+.btn:focus-visible,.cd:focus-visible{outline:3px solid var(--gold);outline-offset:2px}
+.res{list-style:none;margin:14px 0 0;padding:0}.res li{padding:5px 0;border-top:1px solid var(--edge);color:var(--mut)}
+.tbl{width:100%;border-collapse:collapse;font-variant-numeric:tabular-nums}.tbl th{color:var(--mut);font-weight:600;font-size:12px;text-align:right;padding:3px 4px}.tbl td{padding:5px 4px;text-align:right;border-top:1px solid var(--edge)}.tbl th:nth-child(2),.tbl td:nth-child(2){text-align:left}.tbl tr.me td{background:color-mix(in srgb,var(--blue) 18%,transparent);font-weight:700}
+.pl{display:grid;grid-template-columns:22px 1fr 28px 70px 62px;gap:8px;align-items:center;padding:4px 0;border-top:1px solid var(--edge)}.pl b{font-family:'Barlow Condensed',sans-serif;font-size:17px}.pl small{color:var(--mut)}
+.rb{height:6px;background:var(--p2);border-radius:3px;overflow:hidden}.rb i{display:block;height:100%;background:linear-gradient(90deg,#4aa3ff,#ff6fb1)}
+.sbd{display:grid;grid-template-columns:1fr auto 1fr;align-items:center;gap:10px;background:#0b141d;color:#fff;border-radius:10px;padding:10px 16px;margin-bottom:10px}
+.sbd .tm{display:flex;align-items:center;gap:10px;font:700 22px 'Barlow Condensed',sans-serif}.sbd .tm.r{justify-content:flex-end}
+.mid{text-align:center}.sc{font:700 44px/1 'Barlow Condensed',sans-serif;letter-spacing:.05em}.sc u{text-decoration:none;color:#8aa0b3;margin:0 8px}.clk{color:#8aa0b3;font-weight:600}
+.cw{position:relative;margin-bottom:10px}canvas{width:100%;display:block;border-radius:10px;border:1px solid var(--edge)}
+.hud{position:absolute;left:10px;top:10px;font:700 12px 'Barlow Condensed',sans-serif;letter-spacing:.08em;background:rgba(5,14,22,.78);color:#fff;padding:5px 9px;border-radius:5px}
+.tbar{height:6px;background:var(--p2);border-radius:3px;margin-bottom:10px;overflow:hidden;visibility:hidden}.tbar i{display:block;height:100%;width:100%;background:var(--gold)}
+.vp{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-bottom:10px}
+.ph{display:flex;align-items:center;gap:8px;margin-bottom:10px;font:700 18px 'Barlow Condensed',sans-serif}.ph .rl{margin-left:auto;font-size:12px;letter-spacing:.1em;padding:3px 8px;border-radius:4px}.rl.at{background:#12a36b33;color:var(--acc)}.rl.df{background:#e0454533;color:var(--red)}
+.cd{position:relative;display:grid;grid-template-columns:34px 1fr auto;gap:2px 10px;width:100%;text-align:left;font:inherit;color:var(--ink);background:var(--p2);border:1px solid var(--edge);border-left:5px solid var(--c);border-radius:8px;padding:9px 10px;margin-bottom:8px}
+button.cd{cursor:pointer}button.cd:hover:not(:disabled){background:color-mix(in srgb,var(--c) 20%,var(--p2))}button.cd:disabled{cursor:default}
+.cd.sel{background:color-mix(in srgb,var(--c) 28%,var(--p2))}.cd.win{box-shadow:0 0 0 2px var(--c),0 0 18px -2px var(--c)}
+.cd.win:after{content:'WINNER';position:absolute;right:8px;bottom:6px;font:700 11px 'Barlow Condensed',sans-serif;letter-spacing:.1em;color:var(--c)}
+.lt{grid-row:span 2;width:34px;height:34px;border-radius:50%;background:var(--c);color:#0b1a24;display:grid;place-items:center;font:700 19px 'Barlow Condensed',sans-serif}
+.bd b{font:700 17px 'Barlow Condensed',sans-serif;display:block}.bd small{color:var(--mut);display:block}.ct{font:700 20px 'Barlow Condensed',sans-serif;color:var(--mut);align-self:start}
+.mt{display:flex;flex-wrap:wrap;gap:3px 10px;font-size:12px;color:var(--mut);align-items:center;margin-top:3px}.mt em{font-style:normal;padding:0 5px;border-radius:3px;color:#fff}.mt em.g{background:#12a36b}.mt em.b{background:#d24d4d}
+.pips{display:inline-flex;gap:2px;margin-left:3px}.pips i{width:6px;height:9px;background:var(--edge);border-radius:1px}.pips.o i.on{background:var(--blue)}.pips.k i.on{background:var(--red)}
+.vs{grid-column:1/-1;display:flex;flex-wrap:wrap;gap:3px;min-height:22px;margin-top:4px}
+.ch{width:22px;height:22px;border-radius:50%;background:var(--c);color:#0b1a24;display:grid;place-items:center;font:700 13px 'Barlow Condensed',sans-serif;font-style:normal;animation:pop .25s}.ch.me{outline:2px solid var(--ink)}
+@keyframes pop{from{transform:scale(0)}}@media (prefers-reduced-motion:reduce){.ch{animation:none}}
+.calc{min-height:20px;color:var(--mut);margin-bottom:8px;font-weight:600}
+.tk{background:var(--panel);border:1px solid var(--edge);border-radius:10px;padding:8px 14px;margin-bottom:10px}.tk div{padding:4px 0;border-top:1px solid var(--edge)}.tk div:first-child{border:0;font-weight:600}
+.ftb{display:flex;gap:14px;align-items:center;background:var(--panel);border:2px solid var(--gold);border-radius:10px;padding:14px}.ftb b{font:700 24px 'Barlow Condensed',sans-serif;flex:1}.ftb .btn{width:auto}
+@media (max-width:760px){.grid,.vp{grid-template-columns:1fr}.pl{grid-template-columns:22px 1fr 28px 54px 56px}}
+</style></head><body><div class="app">
+<div class="top"><i class="crest lg" style="--k:#1e6bff">E</i><div><b>Eagles</b><br><small>Manager mode. Your squad votes on every move.</small></div><div class="sp"></div><small id="top2"></small></div>
+<section id="hub"></section>
+<section id="match" hidden>
+<div class="sbd"><div class="tm"><i class="crest lg" style="--k:#1e6bff">E</i>Eagles</div><div class="mid"><div class="sc"><span id="hs">0</span><u>–</u><span id="as">0</span></div><div class="clk"><span id="clk">0'</span> · <span id="rd"></span></div></div><div class="tm r"><span id="an"></span><i class="crest lg" id="ac"></i></div></div>
+<div class="cw"><canvas id="cv" width="640" height="400"></canvas><div class="hud" id="hud"></div></div>
+<div class="tbar"><i id="tb"></i></div>
+<div class="calc" id="calc"></div>
+<div class="vp"><div class="pn" id="pe"></div><div class="pn" id="po"></div></div>
+<div class="tk" id="tick"></div>
+<div class="ftb" id="ft" hidden><b id="ftt"></b><button class="btn" id="ftb">BACK TO THE LEAGUE ▶</button></div>
+<small class="mut">11 players per team vote on every move. Most votes wins; a tie goes to the captain. Double-click the pitch to freeze the match while you decide.</small>
+</section></div>
+<script>
+const $=id=>document.getElementById(id),rnd=Math.random,pct=x=>Math.round(x*100),sg=x=>(x<0?'−':'+')+Math.abs(pct(x))+'%';
+const TM=[['Eagles',72,'#1e6bff',.5],['Lions',78,'#e8a317',.7],['Sharks',66,'#00a9b0',.4],['Bulls',74,'#d93a3a',.8],['Wolves',70,'#8892a0',.55],['Tigers',81,'#f07c1a',.65],['Falcons',63,'#7a4be0',.35],['Dragons',69,'#c0212f',.75],['Bears',76,'#7a5232',.3],['Cobras',60,'#3da35d',.6],['Rhinos',68,'#9aa6b2',.45]];
+const A={short:{n:'Short Pass',d:'Recycle and keep shape.',b:.78,a:1,r:.1},long:{n:'Long Ball',d:'Over the top.',b:.5,a:2,r:.5},dribble:{n:'Dribble',d:'Take your man on.',b:.58,a:1,r:.6},wing:{n:'Wing Play',d:'Overlap down the flank.',b:.64,a:1,r:.35},through:{n:'Through Ball',d:'Split the lines.',b:.45,a:2,r:.7},cross:{n:'Cross',d:'Whip it into the box.',s:1,g:[0,.13],r:.55},shoot:{n:'Shoot!',d:'Pull the trigger.',s:1,g:[.08,.14],r:.85},lshot:{n:'Long Shot',d:'Try your luck.',s:1,g:[.08,.02],r:.95}};
+const D={press:{n:'High Press',d:'Hunt the ball high.',r:.8,m:{short:-.2,long:.1,dribble:-.1,through:.05,wing:-.05}},tackle:{n:'Hard Tackle',d:'Win it, whatever it takes.',r:.9,m:{dribble:-.25,wing:-.1,short:-.05,shoot:-.05}},park:{n:'Park the Bus',d:'Everyone behind the ball.',r:.1,m:{long:-.2,shoot:-.2,through:-.15,cross:-.15,lshot:-.1,short:-.05,dribble:-.05}},trap:{n:'Offside Trap',d:'Step up as one.',r:.7,m:{long:-.3,through:-.25,short:.05,dribble:.05,shoot:-.1}},mark:{n:'Man-Mark',d:'Shadow their best player.',r:.5,m:{dribble:-.2,through:-.15,wing:-.1,cross:-.05}},zonal:{n:'Zonal Shape',d:'Hold the lines.',r:.3,m:{cross:-.2,wing:-.1,shoot:-.1,lshot:-.05,long:-.05}}};
+const Z4=[['short','long','wing','dribble'],['short','wing','through','lshot'],['through','cross','dribble','shoot'],['shoot','cross','short','dribble']];
+const DZ=[['press','mark','zonal','trap'],['press','mark','zonal','trap'],['park','tackle','zonal','trap'],['park','tackle','zonal','mark']];
+const ZN=['Own half','Midfield','Final third','The box'],LC=['#4aa3ff','#ffcc4d','#ff6fb1','#7be07b'];
+const POS=['GK','DF','DF','DF','DF','MF','MF','MF','FW','FW','FW'],RK=[.1,.2,.25,.25,.3,.4,.5,.6,.85,.95,.9],UI=7;
+const SQN=['Rey','Moreno','Costa','Duarte','Vega','Silva','Ortiz','Navas','Lobo','Ramos','Torres'];
+const FM=[[0,.5],[.22,.12],[.22,.37],[.22,.63],[.22,.88],[.45,.25],[.45,.5],[.45,.75],[.7,.2],[.7,.5],[.7,.8]];
+const ZC=[[1,2,3,4,5,6,7],[5,6,7,2,3,8],[6,7,8,9,10,5],[8,9,10,7,6]];
+const gp=(x,z)=>x.g[0]+x.g[1]*z,clamp=x=>Math.max(.04,Math.min(.92,x));
+const pips=(n,c)=>`<span class="pips ${c}">${[0,1,2,3,4].map(i=>`<i class="${i<n?'on':''}"></i>`).join('')}</span>`;
+const tags=m=>{const k=Object.keys(m||{}),a=k.filter(x=>m[x]<=-.15).map(x=>A[x].n),w=k.filter(x=>m[x]>=.08).map(x=>A[x].n);return(a.length?`<em class="g">Stops ${a.join(', ')}</em>`:'')+(w.length?`<em class="b">Weak vs ${w.join(', ')}</em>`:'')};
+const mood=r=>r<.35?'Cautious':r>.7?'Bold':'Balanced';
+let S,s=null;
+const po=l=>{let L=Math.exp(-l),k=0,p=1;do{k++;p*=rnd()}while(p>L);return k-1};
+const pts=r=>r.W*3+r.D;
+function newSeason(){S={md:0,o:[1,2,3,4,5,6,7,8,9,10].sort(()=>rnd()-.5),tbl:TM.map(()=>({P:0,W:0,D:0,L:0,F:0,A:0})),res:[]}}
+function add(i,f,a){const r=S.tbl[i];r.P++;r.F+=f;r.A+=a;f>a?r.W++:f<a?r.L++:r.D++}
+function simAll(opp){const r=[...Array(11).keys()].filter(i=>i&&i!==opp).sort(()=>rnd()-.5);for(let k=0;k<8;k+=2){const a=r[k],b=r[k+1],f=po(1.3+(TM[a][1]-TM[b][1])/60),c=po(1.3+(TM[b][1]-TM[a][1])/60);add(a,f,c);add(b,c,f)}}
+const cr=(i,c='')=>`<i class="crest ${c}" style="--k:${TM[i][2]}">${TM[i][0][0]}</i>`;
+function hub(){ph='idle';$('match').hidden=true;$('hub').hidden=false;
+ const rows=S.tbl.map((r,i)=>({r,i})).sort((a,b)=>pts(b.r)-pts(a.r)||(b.r.F-b.r.A)-(a.r.F-a.r.A)||b.r.F-a.r.F),pos=rows.findIndex(x=>!x.i)+1,done=S.md>=10,opp=S.o[S.md],sf=pos==1?'st':pos==2?'nd':pos==3?'rd':'th';
+ $('top2').textContent=`Position ${pos}/11 · ${pts(S.tbl[0])} pts`;
+ const fx=done?`<p style="font-size:20px">You finished <b>${pos}${sf}</b> of 11${pos==1?'. Champions!':'.'}</p><button class="btn" id="go">NEW SEASON ▶</button>`:`<div class="vs2">${cr(0,'lg')}<b>Eagles</b><em>vs</em><b>${TM[opp][0]}</b>${cr(opp,'lg')}</div><div class="cp"><span>${TM[0][1]}</span><div><i style="width:${TM[0][1]}%"></i></div><small>OVR</small><div class="r"><i style="width:${TM[opp][1]}%"></i></div><span>${TM[opp][1]}</span></div><p class="mut">${TM[opp][0]} play a ${TM[opp][3]<.4?'patient':TM[opp][3]>.65?'direct':'balanced'} style. Their eleven vote on every move too.</p><button class="btn" id="go">PLAY MATCH ▶</button>`;
+ $('hub').innerHTML=`<div class="grid"><div><div class="card"><h2>${done?'Season complete':'Matchday '+(S.md+1)+' of 10'}</h2>${fx}<ul class="res">${S.res.slice(-4).reverse().map(x=>`<li>${x}</li>`).join('')}</ul></div>
+<div class="card"><h2>Your squad · 11 votes</h2>${SQN.map((n,i)=>`<div class="pl"><b>${i+1}</b><span>${n}${i==UI?' (C)':''}</span><small>${POS[i]}</small><span class="rb"><i style="width:${RK[i]*100}%"></i></span><small>${mood(RK[i])}</small></div>`).join('')}</div></div>
+<div><div class="card"><h2>League table</h2><table class="tbl"><tr><th></th><th>Club</th><th>P</th><th>W</th><th>D</th><th>L</th><th>GD</th><th>Pts</th></tr>${rows.map(({r,i},k)=>`<tr class="${i?'':'me'}"><td>${k+1}</td><td>${cr(i,'sm')}${TM[i][0]}</td><td>${r.P}</td><td>${r.W}</td><td>${r.D}</td><td>${r.L}</td><td>${r.F-r.A}</td><td><b>${pts(r)}</b></td></tr>`).join('')}</table></div></div></div>`;
+ $('go').onclick=()=>done?(newSeason(),hub()):startMatch(opp)}
+const mkV=t=>RK.map(r=>Math.max(.05,Math.min(.95,r+(TM[t][3]-.5)*.5)));
+function startMatch(oi){s={oi,e:0,o:0,r:1,max:20,att:'e',z:0,log:[],V:[mkV(0),mkV(oi)],ac:[0,0,0,0]};
+ $('hub').hidden=true;$('match').hidden=false;$('ft').hidden=true;$('an').textContent=TM[oi][0];$('ac').style.setProperty('--k',TM[oi][2]);$('ac').textContent=TM[oi][0][0];
+ bx=tx=320;PM=mkP();PO=mkP();log('Kick-off. May the best council win.');scrollTo(0,0);startRun()}
+const mn=()=>Math.min(90,Math.round(((s.r-1)+(ph==='run'?Math.min(1,pt/RUN):1))/s.max*90));
+function log(m){s.log.unshift(`${m}`);s.log=s.log.slice(0,5);$('tick').innerHTML=s.log.map(x=>`<div>${x}</div>`).join('')}
+function board(){$('hs').textContent=s.e;$('as').textContent=s.o;$('rd').textContent=`Move ${s.r}/${s.max}`}
+function card(sd,i,k,atk){const x=(atk?A:D)[k],meta=atk?`${x.s?'GOAL':'ODDS'}${pips(Math.max(1,Math.round((x.s?gp(x,s.z):x.b)*5)),'o')}<span>RISK</span>${pips(Math.round(x.r*5),'k')}`:tags(x.m),t=sd=='e'?'button disabled':'div';
+ return`<${t} class="cd" id="${sd}c${i}" style="--c:${LC[i]}"><span class="lt">${atk?'ABCD'[i]:i+1}</span><span class="bd"><b>${x.n}</b><small>${x.d}</small><span class="mt">${meta}</span></span><span class="ct" id="${sd}n${i}"></span><span class="vs" id="${sd}v${i}"></span></${t.split(' ')[0]}>`}
+function panels(){['e','o'].forEach(sd=>{const atk=(s.att==='e')===(sd==='e'),ks=atk?s.ak:s.dk,t=sd=='e'?0:s.oi;
+ $('p'+sd).innerHTML=`<div class="ph">${cr(t)}${TM[t][0]}<span class="rl ${atk?'at':'df'}">${atk?'ATTACKING':'DEFENDING'}</span></div>`+ks.map((k,i)=>card(sd,i,k,atk)).join('')});
+ $('pe').querySelectorAll('.cd').forEach((b,i)=>b.onclick=()=>{if(ph!=='vote')return;s.my=i;b.classList.add('sel');cast()})}
+function startRun(){ph='run';pt=0;pa=0;s.my=null;s.ak=Z4[s.z];s.dk=DZ[s.z];s.ac=[0,0,0,0];board();panels();tx=xFor();$('calc').textContent='Ballot opens in a moment…';$('tb').parentNode.style.visibility='hidden'}
+function startVote(){ph='vote';vt=VT;$('pe').querySelectorAll('.cd').forEach(b=>b.disabled=false);$('tb').parentNode.style.visibility='visible';
+ $('calc').textContent=s.att==='e'?'Your ball. Pick the move for the Eagles. Opponent shirts are voting on how to stop it.':'Their ball. Pick how the Eagles defend. The marked moves are what they might try.'}
+function ai(ks,S2,r){const vr=r+(rnd()-.5)*.3,w=ks.map(k=>Math.exp(-Math.abs(S2[k].r-vr)*3.2)*(S2[k].s&&s.z>=2?1.8:1));let t=rnd()*w.reduce((a,b)=>a+b,0);for(let i=0;i<4;i++){t-=w[i];if(t<=0)return i}return 3}
+function tally(v,c){const m=[0,0,0,0];v.forEach(x=>m[x]++);const mx=Math.max(...m),top=m.map((n,i)=>n===mx?i:-1).filter(i=>i>=0);return top.length===1?[top[0],mx,0]:[top.includes(v[c])?v[c]:top[0],mx,1]}
+function cast(){if(ph!=='vote')return;ph='reveal';foc=0;$('tb').parentNode.style.visibility='hidden';$('pe').querySelectorAll('.cd').forEach(b=>b.disabled=true);
+ const ae=s.att==='e',me=s.V[0].map((r,i)=>i===UI&&s.my!=null?s.my:ai(ae?s.ak:s.dk,ae?A:D,r)),op=s.V[1].map(r=>ai(ae?s.dk:s.ak,ae?D:A,r));
+ const seq=[];for(let i=0;i<11;i++){seq.push(['e',i,me[i]]);seq.push(['o',i,op[i]])}
+ seq.forEach(([sd,i,v],n)=>setTimeout(()=>{const el=$(sd+'v'+v);el.insertAdjacentHTML('beforeend',`<i class="ch${sd=='e'&&i==UI?' me':''}" style="--c:${LC[v]}">${i+1}</i>`);$(sd+'n'+v).textContent=el.children.length;if((sd=='e')===ae)s.ac[v]++},85*(n+1)));
+ setTimeout(()=>resolve(me,op),2300)}
+function resolve(me,op){
+ const ae=s.att==='e',tm=tally(me,UI),to=tally(op,5),ai_=ae?tm[0]:to[0],di=ae?to[0]:tm[0],aK=s.ak[ai_],dK=s.dk[di],X=A[aK],z=s.z,shot=!!X.s;
+ $('ec'+tm[0]).classList.add('win');$('oc'+to[0]).classList.add('win');
+ const at=ae?0:s.oi,df=ae?s.oi:0,base=shot?gp(X,z):X.b,dm=(D[dK].m||{})[aK]||0,rd=(TM[at][1]-TM[df][1])/260,p=clamp(base+dm+rd),roll=rnd()*100,ok=roll<p*100,who=TM[at][0];
+ let msg,fl='',flip=true,nz=z;
+ if(shot){if(ok){ae?s.e++:s.o++;msg=`GOAL! ${who} score. ${X.n} finds the net.`;fl='GOAL!'}else{msg=`${who}’s ${X.n.toLowerCase()} is saved.`;fl='SAVED'}}
+ else if(ok){nz=Math.min(3,z+X.a);msg=`${X.n} works. ${who} move into ${ZN[nz]}.`;flip=false}
+ else{msg=`${who} lose the ball: ${X.n.toLowerCase()} fails.`;fl='TURNOVER'}
+ $('calc').innerHTML=`${tm[2]?'Eagles tie: captain decides. ':''}${to[2]?'Opponents tie: captain decides. ':''}Odds ${pct(base)}%${dm?' '+sg(dm)+' defense':''}${rd?' '+sg(rd)+' rating':''} = <b>${pct(p)}%</b> · rolled ${Math.round(roll)}`;
+ if(shot)bo=ok?{x:ae?628:12,y:200+(rnd()*30-15),t:1.4,ok:1,gx:ae?618:22}:{x:ae?590:50,y:(ae?PO:PM)[0].y+8,t:1.4,ok:0};
+ const m=mn();if(shot||flip){s.att=ae?'o':'e';s.z=0}else s.z=nz;
+ tx=shot&&ok?(ae?560:80):xFor();flash=fl;ft=fl?120:0;banner={t:msg,u:performance.now()+3300};board();log(`<b>${m}'</b> ${msg}`);
+ ph='result';setTimeout(()=>{if(s.r>=s.max)fullTime();else{s.r++;startRun()}},3500)}
+function fullTime(){ph='end';add(0,s.e,s.o);add(s.oi,s.o,s.e);simAll(s.oi);S.md++;const w=s.e>s.o?'Win':s.e<s.o?'Defeat':'Draw';S.res.push(`${w}: Eagles ${s.e}–${s.o} ${TM[s.oi][0]}`);
+ $('ft').hidden=false;$('ftt').textContent=`Full time: Eagles ${s.e}–${s.o} ${TM[s.oi][0]}. ${w}.`;$('ftb').onclick=hub;$('ft').scrollIntoView({block:'nearest'})}
+const xFor=()=>{const f=(s.z+.5)/4;return 22+(s.att==='e'?f:1-f)*596};
+const cv=$('cv'),g=cv.getContext('2d');
+const mkP=()=>FM.map(()=>({x:320,y:200}));
+let PM=mkP(),PO=mkP(),bp={x:320,y:200},ci=6,pa=0,ph='idle',pt=0,sc=1,foc=0,vt=0,bo=null,banner=null,flash='',ft=0,bx=320,tx=320,last=performance.now(),hs='',lt=0;
+const RUN=2.2,VT=10;
+addEventListener('pointerdown',e=>{if(ph==='idle'||e.target.closest('button'))return;const n=Date.now();if(n-lt<350){foc=!foc;lt=0}else lt=n});
+const ln=(a,b,c,d)=>{g.beginPath();g.moveTo(a,b);g.lineTo(c,d);g.stroke()};
+function mt(k,dir){const gx=dir>0?618:22;if(k=='shoot')return[gx,200];if(k=='lshot')return[gx-dir*10,175];if(k=='wing')return[bp.x+dir*110,bp.y<200?44:356];if(k=='cross')return[gx-dir*80,200];const v={short:[55,-45],long:[200,0],dribble:[40,40],through:[130,-20]}[k];return[bp.x+dir*v[0],bp.y+v[1]]}
+function goal(side,hot){const x0=side?618:22,xs=side?x0:x0-14;g.fillStyle=hot?'#ffe27a':'rgba(235,242,246,.9)';g.fillRect(xs,168,14,64);g.strokeStyle='rgba(60,80,95,.55)';g.lineWidth=1;for(let i=0;i<=14;i+=4)ln(xs+i,168,xs+i,232);for(let j=168;j<=232;j+=4)ln(xs,j,xs+14,j);
+ g.strokeStyle='#fff';g.lineWidth=4;g.strokeRect(xs,168,14,64);[168,232].forEach(y=>{g.fillStyle='#fff';g.strokeStyle='#0b1a24';g.lineWidth=2;g.beginPath();g.arc(x0,y,6,0,6.3);g.fill();g.stroke();g.fillStyle='#e04545';g.beginPath();g.arc(x0,y,2.5,0,6.3);g.fill()})}
+function pl(p,col,num){g.fillStyle='rgba(0,0,0,.28)';g.beginPath();g.ellipse(p.x+1,p.y+9,9,4,0,0,6.3);g.fill();g.fillStyle=col;g.strokeStyle='#fff';g.lineWidth=2;g.beginPath();g.arc(p.x,p.y,10,0,6.3);g.fill();g.stroke();g.fillStyle='#fff';g.font='700 11px "Barlow Condensed",sans-serif';g.textAlign='center';g.textBaseline='middle';g.fillText(num,p.x,p.y+1)}
+function draw(now){
+ requestAnimationFrame(draw);
+ const rdt=Math.min(.05,(now-last)/1000);last=now;if(!s||ph==='idle')return;
+ const tg=foc?.04:ph=='run'?1:ph=='result'||ph=='end'?.6:.3;sc+=(tg-sc)*Math.min(1,rdt*5);const dt=rdt*sc;
+ if(ph=='run'){pt+=dt;if(pt>=RUN)startVote()}else if(ph=='vote'){vt-=rdt*(foc?.12:1);$('tb').style.width=Math.max(0,vt/VT*100)+'%';if(vt<=0)cast()}
+ bx+=(tx+Math.sin(now/900)*12-bx)*Math.min(1,dt*1.6);const sh=bx-320,me=s.att==='e';
+ const tgt=(m,i)=>{const[d,y]=FM[i];let x=m?40+d*430:600-d*430;if(i)x+=sh*(.25+.4*d);return[Math.max(34,Math.min(606,x)),46+y*308+(i?Math.sin(now/700+i+(m?0:2))*3:0)]};
+ [[PM,1],[PO,0]].forEach(([T,m])=>T.forEach((p,i)=>{const[X,Y]=tgt(m,i),k=Math.min(1,dt*2.6);p.x+=(X-p.x)*k;p.y+=(Y-p.y)*k}));
+ const hot=bo&&bo.t>0;
+ if(!hot&&(pa-=dt)<=0){pa=.45+rnd()*.5;ci=ZC[s.z][Math.floor(rnd()*ZC[s.z].length)]}
+ const c=(me?PM:PO)[ci];let bt=[c.x+(me?11:-11),c.y+4];if(hot){bo.t-=rdt;bt=[bo.x,bo.y]}
+ const bk=Math.min(1,hot?rdt*4:dt*11);bp.x+=(bt[0]-bp.x)*bk;bp.y+=(bt[1]-bp.y)*bk;
+ g.fillStyle='#1f5a2d';g.fillRect(0,0,640,400);
+ for(let i=0;i<10;i++){g.fillStyle=i%2?'#2f8443':'#2a7a3d';g.fillRect(22+i*59.6,20,60,360)}
+ const zi=me?s.z:3-s.z;g.fillStyle='rgba(255,255,255,.09)';g.fillRect(22+zi*149,20,149,360);
+ g.strokeStyle='rgba(255,255,255,.88)';g.lineWidth=2.5;g.strokeRect(22,20,596,360);ln(320,20,320,380);g.beginPath();g.arc(320,200,46,0,6.3);g.stroke();
+ g.strokeRect(22,110,92,180);g.strokeRect(526,110,92,180);g.strokeRect(22,158,34,84);g.strokeRect(584,158,34,84);
+ g.fillStyle='#fff';[[320,200],[82,200],[558,200]].forEach(([x,y])=>{g.beginPath();g.arc(x,y,2.5,0,6.3);g.fill()});
+ goal(0,hot&&bo.ok&&bo.gx==22);goal(1,hot&&bo.ok&&bo.gx==618);
+ const oc=TM[s.oi][2];
+ [...PM.map((p,i)=>[p,i?'#1e6bff':'#f5c542',i+1]),...PO.map((p,i)=>[p,i?oc:'#ff7a1a',i+1])].sort((a,b)=>a[0].y-b[0].y).forEach(a=>pl(...a));
+ if(ph=='vote'||ph=='reveal'){const dir=me?1:-1;s.ak.forEach((k,i)=>{let[X,Y]=mt(k,dir);X=Math.max(44,Math.min(596,X));Y=Math.max(44,Math.min(346,Y));const col=LC[i],pu=1+.12*Math.sin(now/220+i);
+  g.strokeStyle=col;g.lineWidth=3;g.setLineDash([8,6]);ln(bp.x,bp.y,X,Y);g.setLineDash([]);
+  g.globalAlpha=.28;g.fillStyle=col;g.beginPath();g.arc(X,Y,22*pu,0,6.3);g.fill();g.globalAlpha=1;g.beginPath();g.arc(X,Y,14,0,6.3);g.fill();
+  g.fillStyle='#0b1a24';g.font='700 17px "Barlow Condensed",sans-serif';g.textAlign='center';g.textBaseline='middle';g.fillText('ABCD'[i],X,Y+1);
+  const lb=A[k].n+(s.ac[i]?'  ×'+s.ac[i]:'');g.font='600 13px Barlow,sans-serif';g.lineWidth=4;g.strokeStyle='rgba(0,0,0,.65)';g.strokeText(lb,X,Y+30);g.fillStyle='#fff';g.fillText(lb,X,Y+30)})}
+ g.strokeStyle='#ffd23f';g.lineWidth=2.5;g.beginPath();g.arc(c.x,c.y,15,0,6.3);g.stroke();
+ g.fillStyle='rgba(0,0,0,.3)';g.beginPath();g.ellipse(bp.x+1,bp.y+5,6,3,0,0,6.3);g.fill();g.fillStyle='#fff';g.strokeStyle='#111';g.lineWidth=1.5;g.beginPath();g.arc(bp.x,bp.y,5.5,0,6.3);g.fill();g.stroke();
+ g.strokeStyle='#ffd23f';g.lineWidth=2;g.beginPath();g.arc(bp.x,bp.y,10+2.5*Math.sin(now/200),0,6.3);g.stroke();
+ if(ft>0){ft--;g.font='italic 700 76px "Barlow Condensed",sans-serif';g.textAlign='center';g.textBaseline='middle';g.lineWidth=9;g.strokeStyle='#000';g.fillStyle='#ffd23f';g.strokeText(flash,320,205);g.fillText(flash,320,205)}
+ if(banner&&now<banner.u){g.font='600 16px Barlow,sans-serif';g.textAlign='center';g.textBaseline='middle';const w=g.measureText(banner.t).width+24;g.fillStyle='rgba(5,14,22,.82)';g.fillRect(320-w/2,346,w,26);g.fillStyle='#fff';g.fillText(banner.t,320,359)}
+ const hv=(ph=='vote'?(foc?'FROZEN':'VOTE NOW'):ph=='run'?'LIVE':ph=='reveal'?'COUNTING VOTES':ph=='result'?'RESULT':'FULL TIME')+' · '+ZN[s.z]+' · double-click to '+(foc?'resume':'freeze');
+ if(hv!==hs){hs=hv;$('hud').textContent=hv}$('clk').textContent=mn()+"'";
+}
+newSeason();hub();requestAnimationFrame(draw);
+</script></body></html>
